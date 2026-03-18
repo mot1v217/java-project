@@ -1,3 +1,3 @@
-com\example\myapp\controller\HomeController.class
-com\example\myapp\MyappApplication.class
-MyProgram.class
+com\example\hookeslaw\model\SpringSimulation.class
+com\example\hookeslaw\controller\HookeController.class
+com\example\hookeslaw\HookesLawApplication.class

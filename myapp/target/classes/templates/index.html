@@ -4,13 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title th:text="${title}">Закон Гука: имитация пружины</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+
+    <!-- Метаданные для JavaScript -->
+    <script th:inline="javascript">
+      /*<![CDATA[*/
+      window.initialState = {
+          stiffness: [[${simulation.stiffness}]],
+          mass: [[${simulation.mass}]],
+          damping: [[${simulation.damping}]],
+          equilibriumX: [[${T(com.example.hookeslaw.model.SpringSimulation).getEquilibriumX()}]],
+          minX: [[${T(com.example.hookeslaw.model.SpringSimulation).getMinPosition()}]],
+          maxX: [[${T(com.example.hookeslaw.model.SpringSimulation).getMaxPosition()}]]
+      };
+      /*]]>*/
+    </script>
   </head>
   <body>
     <div class="card">
       <h1>
         ⚡ <span th:text="${title}">закон Гука</span>
-        <span>F = –k·Δx</span>
+        <span th:text="'F = –k·Δx'">F = –k·Δx</span>
       </h1>
       <div class="sub" th:text="${description}">
         🔄 имитация колебаний пружины · тяните груз мышкой
@@ -22,8 +36,18 @@
 
       <div class="info-bar">
         <div class="force-badge">
-          <div id="forceDisplay">сила упругости: 0.0 Н</div>
-          <div id="displacementDisplay">смещение: 0.0 px</div>
+          <div
+            id="forceDisplay"
+            th:text="'сила упругости: ' + ${simulation.force} + ' Н'"
+          >
+            сила упругости: 0.0 Н
+          </div>
+          <div
+            id="displacementDisplay"
+            th:text="'смещение: ' + ${simulation.displacement} + ' px'"
+          >
+            смещение: 0.0 px
+          </div>
         </div>
         <div class="legend">
           <span>равновесие</span>
@@ -35,55 +59,96 @@
         <div class="slider-group">
           <label>
             <span>🔧 жёсткость k</span>
-            <span id="kValue">1.50</span>
+            <span id="kValue" th:text="${simulation.stiffness}">1.50</span>
           </label>
           <input
             type="range"
             id="kSlider"
             min="0.2"
             max="3.5"
-            value="1.5"
+            th:value="${simulation.stiffness}"
             step="0.01"
           />
         </div>
         <div class="slider-group">
           <label>
             <span>⚖️ масса (инерция)</span>
-            <span id="massValue">1.0</span>
+            <span id="massValue" th:text="${simulation.mass}">1.0</span>
           </label>
           <input
             type="range"
             id="massSlider"
             min="0.3"
             max="2.8"
-            value="1.0"
+            th:value="${simulation.mass}"
             step="0.05"
           />
         </div>
         <div class="slider-group">
           <label>
             <span>💧 демпфирование</span>
-            <span id="dampValue">0.14</span>
+            <span id="dampValue" th:text="${simulation.damping}">0.14</span>
           </label>
           <input
             type="range"
             id="dampSlider"
             min="0.0"
             max="0.45"
-            value="0.14"
+            th:value="${simulation.damping}"
             step="0.01"
           />
         </div>
       </div>
+
+      <!-- Скрытая форма для отправки данных на сервер (если нужна) -->
+      <form
+        id="paramsForm"
+        th:action="@{/update}"
+        method="post"
+        style="display: none"
+      >
+        <input
+          type="hidden"
+          name="stiffness"
+          id="hiddenStiffness"
+          th:value="${simulation.stiffness}"
+        />
+        <input
+          type="hidden"
+          name="mass"
+          id="hiddenMass"
+          th:value="${simulation.mass}"
+        />
+        <input
+          type="hidden"
+          name="damping"
+          id="hiddenDamping"
+          th:value="${simulation.damping}"
+        />
+        <input
+          type="hidden"
+          name="displacement"
+          id="hiddenDisplacement"
+          th:value="${simulation.displacement}"
+        />
+      </form>
 
       <div class="hint">
         <i>⬅️ ➡️</i> перетащите груз — возникнет сила, стремящаяся вернуть его в
         равновесие (пунктир)
       </div>
       <footer>
-        F = –k·x | текущее ускорение зависит от массы и демпфирования
+        <span
+          th:text="'F = –k·x | текущее ускорение зависит от массы и демпфирования'"
+          >F = –k·x | текущее ускорение зависит от массы и демпфирования</span
+        >
+        <span
+          th:if="${simulation.acceleration != 0}"
+          th:text="' | a = ' + ${#numbers.formatDecimal(simulation.acceleration, 1, 2)}"
+        ></span>
       </footer>
     </div>
+
     <script th:src="@{/js/script.js}"></script>
   </body>
 </html>
