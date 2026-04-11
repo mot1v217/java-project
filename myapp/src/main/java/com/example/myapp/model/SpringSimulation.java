@@ -1,10 +1,9 @@
-package com.example.hookeslaw.model;
+package com.example.myapp.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Getter;
 import org.springframework.stereotype.Component;
-
 import lombok.AllArgsConstructor;
 
 @Data
@@ -19,11 +18,9 @@ public class SpringSimulation {
     private double force = 0.0;
     private double velocity = 0.0;
     private double acceleration = 0.0;
-    @Getter
+    
     private static final double EQUILIBRIUM_X = 400.0;
-    @Getter
     private static final double MIN_POSITION = 240.0;
-    @Getter
     private static final double MAX_POSITION = 560.0;
     
     public double calculateForce() {
@@ -53,5 +50,18 @@ public class SpringSimulation {
     
     public boolean isValidPosition(double position) {
         return position >= MIN_POSITION && position <= MAX_POSITION;
+    }
+    
+    // СТАТИЧЕСКИЕ ГЕТТЕРЫ - ДОБАВЬТЕ ЭТИ МЕТОДЫ
+    public static double getEquilibriumX() {
+        return EQUILIBRIUM_X;
+    }
+    
+    public static double getMinPosition() {
+        return MIN_POSITION;
+    }
+    
+    public static double getMaxPosition() {
+        return MAX_POSITION;
     }
 }

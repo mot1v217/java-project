@@ -1,30 +1,19 @@
-package com.example.hookeslaw.controller;
+package com.example.myapp.controller.api;  // Измените package
 
 import java.util.HashMap;
 import java.util.Map;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import com.example.hookeslaw.model.SpringSimulation;
+import com.example.myapp.model.SpringSimulation;  // Измените импорт
 import lombok.RequiredArgsConstructor;
 
-@Controller
+@RestController
+@RequestMapping("/api")
 @RequiredArgsConstructor
-public class HookeController {
+public class HookeApiController {
     
     private final SpringSimulation currentSimulation;
     
-    @GetMapping("/")
-    public String index(Model model) {
-        model.addAttribute("simulation", currentSimulation);
-        model.addAttribute("initialK", currentSimulation.getStiffness());
-        model.addAttribute("initialMass", currentSimulation.getMass());
-        model.addAttribute("initialDamp", currentSimulation.getDamping());
-        return "index";
-    }
-    
-    @PostMapping("/api/update-params")
-    @ResponseBody
+    @PostMapping("/update-params")
     public Map<String, Object> updateParameters(@RequestBody Map<String, Double> params) {
         Map<String, Object> response = new HashMap<>();
         
@@ -51,8 +40,7 @@ public class HookeController {
         return response;
     }
     
-    @GetMapping("/api/state")
-    @ResponseBody
+    @GetMapping("/state")
     public Map<String, Object> getState() {
         Map<String, Object> response = new HashMap<>();
         currentSimulation.updatePhysics();
@@ -71,8 +59,7 @@ public class HookeController {
         return response;
     }
     
-    @PostMapping("/api/reset")
-    @ResponseBody
+    @PostMapping("/reset")
     public Map<String, Object> reset() {
         currentSimulation.setDisplacement(0.0);
         currentSimulation.setVelocity(0.0);
