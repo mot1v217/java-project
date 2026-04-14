@@ -66,8 +66,9 @@
         border-radius: 20px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         cursor: grab;
-        touch-action: none; /* для удобства на мобильных */
+        touch-action: none;
       }
+
       canvas:active {
         cursor: grabbing;
       }

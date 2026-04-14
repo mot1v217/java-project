@@ -1,4 +1,4 @@
-package com.example.hookeslaw; // Пакет должен быть ТАКИМ ЖЕ, как в основном классе
+package com.example.myapp; // Пакет должен быть ТАКИМ ЖЕ, как в основном классе
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
