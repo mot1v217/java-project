@@ -1,9 +1,9 @@
-package com.example.myapp.controller.api;  // Измените package
+package com.example.myapp.controller.api;
 
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.web.bind.annotation.*;
-import com.example.myapp.model.SpringSimulation;  // Измените импорт
+import com.example.myapp.model.SpringSimulation;
 import lombok.RequiredArgsConstructor;
 
 @RestController
