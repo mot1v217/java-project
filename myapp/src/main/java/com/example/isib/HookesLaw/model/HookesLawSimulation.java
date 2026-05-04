@@ -1,4 +1,4 @@
-package com.example.myapp.model;
+package com.example.isib.HookesLaw.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.AllArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Component
-public class SpringSimulation {
+public class HookesLawSimulation {
     private double stiffness = 1.5;
     private double mass = 1.0;
     private double damping = 0.14;
@@ -52,7 +52,6 @@ public class SpringSimulation {
         return position >= MIN_POSITION && position <= MAX_POSITION;
     }
     
-    // СТАТИЧЕСКИЕ ГЕТТЕРЫ - ДОБАВЬТЕ ЭТИ МЕТОДЫ
     public static double getEquilibriumX() {
         return EQUILIBRIUM_X;
     }

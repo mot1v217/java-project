@@ -1,17 +1,17 @@
-package com.example.myapp.controller.api;
+package com.example.isib.HookesLaw.controller.api;
 
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.web.bind.annotation.*;
-import com.example.myapp.model.SpringSimulation;
+import com.example.isib.HookesLaw.model.HookesLawSimulation;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/HookesLaw/api")
 @RequiredArgsConstructor
-public class HookeApiController {
+public class HookesLawApiController {
     
-    private final SpringSimulation currentSimulation;
+    private final HookesLawSimulation currentSimulation;
     
     @PostMapping("/update-params")
     public Map<String, Object> updateParameters(@RequestBody Map<String, Double> params) {
@@ -52,9 +52,9 @@ public class HookeApiController {
         response.put("force", currentSimulation.getForce());
         response.put("acceleration", currentSimulation.getAcceleration());
         response.put("position", currentSimulation.getCurrentPosition());
-        response.put("equilibriumX", SpringSimulation.getEquilibriumX());
-        response.put("minX", SpringSimulation.getMinPosition());
-        response.put("maxX", SpringSimulation.getMaxPosition());
+        response.put("equilibriumX", HookesLawSimulation.getEquilibriumX());
+        response.put("minX", HookesLawSimulation.getMinPosition());
+        response.put("maxX", HookesLawSimulation.getMaxPosition());
         
         return response;
     }

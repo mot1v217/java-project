@@ -4,18 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title th:text="${title}">Закон Гука: имитация пружины</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/HookesLaw/css/HookesLawStyle.css}" />
 
-    <!-- Метаданные для JavaScript -->
+    <!-- Метаданные для JavaScript --> 
     <script th:inline="javascript">
       /*<![CDATA[*/
       window.initialState = {
           stiffness: [[${simulation.stiffness}]],
           mass: [[${simulation.mass}]],
           damping: [[${simulation.damping}]],
-          equilibriumX: [[${T(com.example.myapp.model.SpringSimulation).getEquilibriumX()}]],
-          minX: [[${T(com.example.myapp.model.SpringSimulation).getMinPosition()}]],
-          maxX: [[${T(com.example.myapp.model.SpringSimulation).getMaxPosition()}]]
+          equilibriumX: [[${T(com.example.isib.HookesLaw.model.HookesLawSimulation).getEquilibriumX()}]],
+          minX: [[${T(com.example.isib.HookesLaw.model.HookesLawSimulation).getMinPosition()}]],
+          maxX: [[${T(com.example.isib.HookesLaw.model.HookesLawSimulation).getMaxPosition()}]]
       };
       /*]]>*/
     </script>
@@ -100,7 +100,7 @@
         </div>
       </div>
 
-      <!-- Скрытая форма для отправки данных на сервер (если нужна) -->
+      <!-- Скрытая форма для отправки данных на сервер  -->
       <form
         id="paramsForm"
         th:action="@{/update}"
@@ -149,6 +149,6 @@
       </footer>
     </div>
 
-    <script th:src="@{/js/script.js}"></script>
+    <script th:src="@{/HookesLaw/js/HookesLawScript.js}"></script>
   </body>
 </html>
